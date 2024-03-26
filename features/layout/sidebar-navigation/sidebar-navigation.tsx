@@ -92,7 +92,7 @@ export function SidebarNavigation() {
               onClick={() => toggleSidebar()}
               className={classNames(
                 styles.collapseMenuItem,
-                isSidebarCollapsed && styles.collapsed,
+                isSidebarCollapsed && styles.isCollapsed,
               )}
             />
           </ul>
