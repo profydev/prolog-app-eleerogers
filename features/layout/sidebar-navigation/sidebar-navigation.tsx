@@ -35,9 +35,10 @@ export function SidebarNavigation() {
       >
         <header className={styles.header}>
           <div
-            className={classNames(styles.logoContainer, {
-              [styles.collapsed]: isSidebarCollapsed,
-            })}
+            className={classNames(
+              styles.logoContainer,
+              isSidebarCollapsed && styles.collapsed,
+            )}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
