@@ -56,6 +56,40 @@
   }
 }
 
+.logoContainer {
+  // Defaults for mobile view
+  .logoLarge {
+    display: block; // Always show the large logo by default (for mobile)
+  }
+
+  .logoSmall {
+    display: none; // Hide the small logo by default
+  }
+}
+
+// Larger screens
+@media (min-width: breakpoint.$desktop) {
+  .logoContainer {
+    .logoLarge {
+      display: block; // Show the large logo when sidebar is collapsed
+    }
+
+    .logoSmall {
+      display: none; // Hide the small logo when sidebar is collapsed
+    }
+  }
+
+  .logoContainer.collapsed {
+    .logoLarge {
+      display: none; // Hide the large logo on desktop by default
+    }
+
+    .logoSmall {
+      display: block; // Show the small logo on desktop by default
+    }
+  }
+}
+
 .menuButton {
   @media (min-width: breakpoint.$desktop) {
     display: none;
