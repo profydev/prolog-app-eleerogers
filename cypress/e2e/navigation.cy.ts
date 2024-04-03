@@ -40,16 +40,20 @@ describe("Sidebar Navigation", () => {
     });
 
     it("is collapsible", () => {
-      // Verify large logo is displayed by default
-      cy.get('img[alt="Large logo"]').should("be.visible");
-      cy.get('img[alt="Small logo"]').should("not.be.visible");
+      cy.get("header").within(() => {
+        // Verify large logo is displayed by default
+        cy.get('img[alt="Large logo"]').should("be.visible");
+        cy.get('img[alt="Small logo"]').should("not.be.visible");
+      });
 
       // collapse navigation
       cy.get("nav").contains("Collapse").click();
 
       // Verify small logo is displayed when sidebar is collapsed
-      cy.get('img[alt="Large logo"]').should("not.be.visible");
-      cy.get('img[alt="Small logo"]').should("be.visible");
+      cy.get("header").within(() => {
+        cy.get('img[alt="Large logo"]').should("not.be.visible");
+        cy.get('img[alt="Small logo"]').should("be.visible");
+      });
 
       // check that links still exist and are functionable
       cy.get("nav").find("a").should("have.length", 6).eq(1).click();
@@ -116,23 +120,29 @@ describe("Sidebar Navigation", () => {
     });
 
     it("displays the correct logo based on sidebar state", () => {
-      // Verify large logo is visible by default
-      cy.get('img[alt="Large logo"]').should("be.visible");
-      cy.get('img[alt="Small logo"]').should("not.be.visible");
+      cy.get("header").within(() => {
+        // Verify large logo is visible by default
+        cy.get('img[alt="Large logo"]').should("be.visible");
+        cy.get('img[alt="Small logo"]').should("not.be.visible");
+      });
 
       // Toggle the sidebar collapse state
       cy.get("nav").contains("Collapse").click();
 
-      // Now the small logo should be visible, and the large logo hidden
-      cy.get('img[alt="Small logo"]').should("be.visible");
-      cy.get('img[alt="Large logo"]').should("not.be.visible");
+      cy.get("header").within(() => {
+        // Now the small logo should be visible, and the large logo hidden
+        cy.get('img[alt="Small logo"]').should("be.visible");
+        cy.get('img[alt="Large logo"]').should("not.be.visible");
+      });
 
       // Change viewport to iPad portrait
       cy.viewport("ipad-2", "portrait");
 
-      // Verify large logo is visible again
-      cy.get('img[alt="Large logo"]').should("be.visible");
-      cy.get('img[alt="Small logo"]').should("not.be.visible");
+      cy.get("header").within(() => {
+        // Verify large logo is visible again
+        cy.get('img[alt="Large logo"]').should("be.visible");
+        cy.get('img[alt="Small logo"]').should("not.be.visible");
+      });
     });
   });
 });
