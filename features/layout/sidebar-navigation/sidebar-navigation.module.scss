@@ -67,21 +67,21 @@
 @media (min-width: breakpoint.$desktop) {
   .logoContainer {
     .logoLarge {
-      display: block; // Show the large logo when sidebar is collapsed
+      display: block;
     }
 
     .logoSmall {
-      display: none; // Hide the small logo when sidebar is collapsed
+      display: none;
     }
   }
 
   .logoContainer.collapsed {
     .logoLarge {
-      display: none; // Hide the large logo on desktop by default
+      display: none;
     }
 
     .logoSmall {
-      display: block; // Show the small logo on desktop by default
+      display: block;
       width: 1.4375rem;
     }
   }
