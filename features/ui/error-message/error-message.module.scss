@@ -1,0 +1,57 @@
+@use "@styles/color";
+
+.container {
+  display: flex;
+  padding: 16px;
+  justify-content: space-between; /* Updated this line */
+  align-items: center;
+  gap: 12px;
+  color: color.$error-700;
+  border-radius: 8px;
+  border: 1px solid color.$error-300;
+  background: color.$error-25;
+}
+
+.leftContent {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Adjust the gap as needed */
+}
+
+.errorText {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.04em;
+  margin-left: 2px;
+}
+
+.tryAgainButton {
+  display: flex;
+  align-items: center;
+  gap: 8px; // Adjust the gap as needed
+  background: none; // Removes background
+  border: none; // Removes border
+  padding: 0; // Removes padding
+  margin: 0; // Removes margin
+  cursor: pointer; // Optional: to ensure it still looks clickable
+
+  &:focus {
+    // Removes the focus outline
+    outline: none;
+  }
+
+  &:hover {
+    // Optional: style for hover state
+    background: none; // Ensures the background does not change on hover
+    // Add other hover styles if necessary
+  }
+
+  &:active {
+    // Optional: style for active/click state
+    transform: scale(
+      0.98
+    ); // Optional: slight shrink effect to mimic a button press
+  }
+}
