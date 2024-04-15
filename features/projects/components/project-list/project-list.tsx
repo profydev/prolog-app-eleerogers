@@ -5,7 +5,7 @@ import { ErrorMessage } from "@features/ui";
 import styles from "./project-list.module.scss";
 
 export function ProjectList() {
-  const { data, isLoading, isError, error } = useGetProjects();
+  const { data, isLoading, isError, error, refetch } = useGetProjects();
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -16,7 +16,7 @@ export function ProjectList() {
     return (
       <ErrorMessage
         message="There was a problem while loading the project data"
-        onClick={() => alert("Try again")}
+        onClick={() => refetch()}
       />
     );
   }
