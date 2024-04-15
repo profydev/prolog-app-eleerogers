@@ -13,7 +13,10 @@ export default {
 
 const Template: StoryFn<typeof ErrorMessage> = () => (
   <div style={{ padding: 10 }}>
-    <ErrorMessage />
+    <ErrorMessage
+      message="There was a problem while loading the project data"
+      onClick={() => alert("Try Again")}
+    />
   </div>
 );
 
