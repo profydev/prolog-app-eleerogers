@@ -1,0 +1,53 @@
+@use "@styles/color";
+@use "@styles/space";
+
+.container {
+  display: flex;
+  padding: space.$s4;
+  justify-content: space-between;
+  align-items: center;
+  gap: space.$s3;
+  color: color.$error-700;
+  border-radius: space.$s2;
+  border: 1px solid color.$error-300;
+  background: color.$error-25;
+}
+
+.leftContent {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: space.$s2;
+}
+
+.errorText {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.04em;
+  margin-left: 2px;
+}
+
+.tryAgainButton {
+  display: flex;
+  align-items: center;
+  gap: space.$s2;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    background: none;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}

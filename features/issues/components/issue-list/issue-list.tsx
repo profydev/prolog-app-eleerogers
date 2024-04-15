@@ -4,6 +4,7 @@ import { useGetProjects } from "@features/projects";
 import { useGetIssues } from "../../api/use-get-issues";
 import { IssueRow } from "./issue-row";
 import { LoadingSpinner } from "@features/ui";
+import { ErrorMessage } from "@features/ui";
 import styles from "./issue-list.module.scss";
 
 export function IssueList() {
@@ -22,14 +23,16 @@ export function IssueList() {
     return <LoadingSpinner />;
   }
 
-  if (projects.isError) {
-    console.error(projects.error);
-    return <div>Error loading projects: {projects.error.message}</div>;
-  }
-
-  if (issuesPage.isError) {
-    console.error(issuesPage.error);
-    return <div>Error loading issues: {issuesPage.error.message}</div>;
+  if (projects.isError || issuesPage.isError) {
+    return (
+      <ErrorMessage
+        message="There was a problem while loading the issue data"
+        onClick={() => {
+          projects.refetch();
+          issuesPage.refetch();
+        }}
+      />
+    );
   }
 
   const projectIdToLanguage = (projects.data || []).reduce(

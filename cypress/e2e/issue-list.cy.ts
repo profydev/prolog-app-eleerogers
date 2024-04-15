@@ -3,34 +3,56 @@ import mockIssues2 from "../fixtures/issues-page-2.json";
 import mockIssues3 from "../fixtures/issues-page-3.json";
 
 describe("Issue List", () => {
-  beforeEach(() => {
-    // setup request mocks
-    cy.intercept("GET", "https://prolog-api.profy.dev/project", {
-      fixture: "projects.json",
-    });
-    cy.intercept("GET", "https://prolog-api.profy.dev/issue?page=1", {
-      fixture: "issues-page-1.json",
-    });
-    cy.intercept("GET", "https://prolog-api.profy.dev/issue?page=2", {
-      fixture: "issues-page-2.json",
-    });
-    cy.intercept("GET", "https://prolog-api.profy.dev/issue?page=3", {
-      fixture: "issues-page-3.json",
-    });
-
+  it("shows a loading spinner", () => {
     // open issues page
     cy.visit(`http://localhost:3000/dashboard/issues`);
-  });
 
-  it("shows a loading spinner", () => {
     cy.get("[data-testid='loading-spinner']").should("be.visible");
 
     cy.get("[data-testid='issue-list']").should("be.visible");
     cy.get("[data-testid='loading-spinner']").should("not.exist");
   });
 
+  it("shows an error message", () => {
+    // setup request mock
+    cy.intercept(
+      { url: "https://prolog-api.profy.dev/project", times: 4 },
+      {
+        statusCode: 500,
+      },
+    );
+
+    // open projects page
+    cy.visit("http://localhost:3000/dashboard/issues");
+
+    // check that the error message is shown
+    cy.get("[data-testid='error-message']", { timeout: 15000 })
+      .should("be.visible")
+      .find("button")
+      .click();
+
+    cy.get("[data-testid='issue-list']").should("be.visible");
+  });
+
   context("desktop resolution", () => {
     beforeEach(() => {
+      // setup request mocks
+      cy.intercept("GET", "https://prolog-api.profy.dev/project", {
+        fixture: "projects.json",
+      });
+      cy.intercept("GET", "https://prolog-api.profy.dev/issue?page=1", {
+        fixture: "issues-page-1.json",
+      });
+      cy.intercept("GET", "https://prolog-api.profy.dev/issue?page=2", {
+        fixture: "issues-page-2.json",
+      });
+      cy.intercept("GET", "https://prolog-api.profy.dev/issue?page=3", {
+        fixture: "issues-page-3.json",
+      });
+
+      // open issues page
+      cy.visit(`http://localhost:3000/dashboard/issues`);
+
       cy.viewport(1025, 900);
       // set button aliases
       cy.get("button").contains("Previous").as("prev-button");
